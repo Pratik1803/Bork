@@ -15,10 +15,6 @@ app.use(taskRouter);
 app.use(habitRouter);
 app.use(feedbackRouter);
 
-// app.get("/", (req,res)=>{
-//     res.send("Hello from the backend!");
-// });
-
 if(process.env.NODE_ENV == "production"){
     app.use(express.static("client/build"));
     app.get("*", (req,res)=>{
