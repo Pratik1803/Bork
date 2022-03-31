@@ -14,7 +14,7 @@ function SignUp() {
 		username: "",
 		email: "",
 		contact: "",
-		profession: "",
+		// profession: "",
 		password: "",
 		confirmPassword: "",
 	});
@@ -30,7 +30,7 @@ function SignUp() {
 					username,
 					email,
 					contact,
-					profession,
+					// profession,
 					password
 				}
 			});
@@ -40,6 +40,7 @@ function SignUp() {
 			document.querySelector(".signup_err").innerHTML = "Username or Email already taken!";
 			console.error(error);
 		};
+		alert("User Created Successfully!");
 		setLoading(false);
 	};
 
@@ -53,7 +54,11 @@ function SignUp() {
 
 
 	return (
-		<div className={Styles.signup}>
+		<div className={Styles.signup} onKeyDown={(e)=>{
+			if(e.key === 'Enter'){
+				createUser();
+			}
+		}}>
 			<div className={Styles.signup_wrapper}>
 				<div className={Styles.signup_img}>
 					<img src={signup} alt="" />
@@ -91,7 +96,7 @@ function SignUp() {
 							}}
 							variant="standard"
 						/>
-						<TextField
+						{/* <TextField
 							label="Profession"
 							value={user.profession}
 							onChange={(e) => {
@@ -99,7 +104,7 @@ function SignUp() {
 							}}
 							size="small"
 							variant="standard"
-						/>
+						/> */}
 						<TextField
 							label="Password"
 							type={"password"}
