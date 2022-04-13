@@ -6,10 +6,23 @@ const userRouter = require(path.join(__dirname, "./routers/user"));
 const taskRouter = require(path.join(__dirname, "./routers/tasks"));
 const habitRouter = require(path.join(__dirname, "./routers/habit"));
 const feedbackRouter = require(path.join(__dirname, "./routers/feedback"));
+const cors = require('cors');
 
 const port = process.env.PORT || 8000;
 
+const whitelist = ['https://pratik1803.github.io/']
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+};
+
 app.use(express.json());
+app.use(cors(corsOptions));
 app.use(userRouter);
 app.use(taskRouter);
 app.use(habitRouter);
