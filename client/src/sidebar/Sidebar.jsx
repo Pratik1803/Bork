@@ -119,7 +119,7 @@ function Sidebar() {
 					</NavLink>
 				</div>
 					<div className={Styles.logout_btn} onClick={
-						setStates((perv)=>({...perv, userLoggedIn:false}));
+						setStates((perv)=>({...perv, userLoggedIn:false}))
 					}>
 						<Icon icon="carbon:logout" />
 						<p>Logout</p>
