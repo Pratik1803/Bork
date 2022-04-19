@@ -18,9 +18,9 @@ function Login() {
 		password: "",
 	});
 
-	useEffect(()=>{
-		setStates((prev)=>({...prev, userLoggedIn:false}));
-	},[]);
+	// useEffect(()=>{
+	// 	setStates((prev)=>({...prev, userLoggedIn:false}));
+	// },[]);
 
 	const loginUser = async (e) => {
 		if (e.key === "Enter") {
