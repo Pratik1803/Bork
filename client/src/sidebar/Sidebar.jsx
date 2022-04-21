@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Styles from "./Sidebar.module.scss";
 import { Icon } from "@iconify/react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { StateContext } from "../App";
 
+
 function Sidebar() {
+	const navigator = useNavigate();
 	const { states, setStates } = useContext(StateContext);
 	const [activeLinksStatus, setActiveLinksStatus] = useState("todo");
 	useEffect(() => {
@@ -118,9 +120,10 @@ function Sidebar() {
 						</div>
 					</NavLink>
 				</div>
-					<div className={Styles.logout_btn} onClick={
-						setStates((perv)=>({...perv, userLoggedIn:false}))
-					}>
+					<div className={Styles.logout_btn} onClick={()=>{
+							setStates((perv)=>({...perv, userLoggedIn:false}));
+							navigator("/");
+						}}>
 						<Icon icon="carbon:logout" />
 						<p>Logout</p>
 					</div>

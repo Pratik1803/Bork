@@ -18,12 +18,8 @@ function Login() {
 		password: "",
 	});
 
-	// useEffect(()=>{
-	// 	setStates((prev)=>({...prev, userLoggedIn:false}));
-	// },[]);
-
 	const loginUser = async (e) => {
-		if (e.key === "Enter") {
+		if (e.key === "Enter" || e.type === "click") {
 			setLoading(true);
 			try {
 				const response = await axios({
@@ -33,7 +29,12 @@ function Login() {
 				});
 				if (response.data.state) {
 					document.querySelector(".login_err").innerHTML = "";
-					setStates((prev) => ({ ...prev,user_email:response.data.result.email, username: response.data.result.username, userLoggedIn:true }));
+					setStates((prev) => ({
+						...prev,
+						user_email: response.data.result.email,
+						username: response.data.result.username,
+						userLoggedIn: true,
+					}));
 					alert("Welcome");
 					navigator(`/home?user_id=${response.data.result._id}`);
 				} else {
@@ -46,29 +47,6 @@ function Login() {
 			setLoading(false);
 		}
 	};
-
-	const loginUserOnClick = async ()=>{
-		setLoading(true);
-			try {
-				const response = await axios({
-					url: "/userSignIn",
-					method: "post",
-					data: user,
-				});
-				if (response.data.state) {
-					document.querySelector(".login_err").innerHTML = "";
-					setStates((prev) => ({ ...prev, username: user.username, userLoggedin:true }));
-					alert("Welcome");
-					navigator(`/todo?user_id=${response.data.result._id}`);
-				} else {
-					document.querySelector(".login_err").innerHTML =
-						"Incorrect Username or Password!";
-				}
-			} catch (error) {
-				console.error(error);
-			}
-			setLoading(false);
-	}
 
 	return (
 		<div className={Styles.login} onKeyDown={loginUser} tabIndex="0">
@@ -104,7 +82,7 @@ function Login() {
 							style={{ color: "red", fontSize: "10px", fontWeight: "600" }}
 						></p>
 						<div className={Styles.bottom_btns}>
-							<Button onClick={loginUserOnClick}>
+							<Button onClick={loginUser}>
 								{loading ? "loading" : "Sign-In"}
 							</Button>
 						</div>
