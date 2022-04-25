@@ -8,10 +8,10 @@ const FeedBack = require(path.join(__dirname, "../models/Feedback"));
 router.post("/feedback", async (req,res)=>{
     try {
         const result = await FeedBack(req.body).save();
-        res.status(200).send();
+        res.status(200).json();
     } catch (error) {
         console.log(error);
-        res.status(400).send();
+        res.status(400).josn();
     }
 });
 
